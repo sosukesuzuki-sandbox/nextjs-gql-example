@@ -24,4 +24,4 @@ const Container: FC<ContainerProps> = ({ repoList }) => {
   return <Presenter repoList={repoList} />;
 };
 
-export { Container as Repositories };
+export { Container as RepositoriesSection };

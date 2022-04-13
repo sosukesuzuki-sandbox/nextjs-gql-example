@@ -1,9 +1,10 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Profile } from "./types";
-import { Repositories } from "./Repositories";
-import { RepoList } from "./Repositories/types";
+import { RepositoriesSection } from "./RepositoriesSection";
+import { RepoList } from "./RepositoriesSection/types";
 
+export * from "./types";
 export * from "./fragment";
 
 type PresenterProps = {
@@ -20,7 +21,7 @@ const Presenter: FC<PresenterProps> = ({ name, bio, avatorUrl, repoList }) => (
       {bio ? <p>{bio}</p> : null}
     </div>
     <div>
-      <Repositories repoList={repoList} />
+      <RepositoriesSection repoList={repoList} />
     </div>
   </div>
 );
@@ -39,4 +40,4 @@ const Container: FC<ContainerProps> = ({ profile }) => {
   );
 };
 
-export { Container as Profile };
+export { Container as ProfileSection };

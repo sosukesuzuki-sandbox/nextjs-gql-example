@@ -1,21 +1,27 @@
 import { useMemo, FC } from "react";
 import { useRouter } from "next/router";
 import { gql, QueryResult, useQuery } from "@apollo/client";
-import { Profile, PROFILE_FRAGMENT } from "~/components/users/Profile";
+import {
+  ProfileSection,
+  Profile,
+  PROFILE_FRAGMENT,
+} from "~/components/users/ProfileSection";
 import { Loading } from "~/components/common/Loading";
 
+type Result = { user: Profile };
+
 type Props = {
-  data: QueryResult["data"];
-  error: QueryResult["error"];
-  loading: QueryResult["loading"];
+  data: QueryResult<Result>["data"];
+  error: QueryResult<Result>["error"];
+  loading: QueryResult<Result>["loading"];
 };
 
 const Presenter: FC<Props> = ({ loading, data }) =>
-  loading ? (
+  loading || data == null ? (
     <Loading />
   ) : (
     <div>
-      <Profile profile={data.user} />
+      <ProfileSection profile={data.user} />
     </div>
   );
 
@@ -33,7 +39,7 @@ const Container: FC = () => {
   const username = useMemo(() => {
     return router.query.name as string;
   }, [router.query]);
-  const { data, error, loading } = useQuery(query, {
+  const { data, error, loading } = useQuery<Result>(query, {
     variables: { login: username },
   });
   return <Presenter data={data} error={error} loading={loading} />;
