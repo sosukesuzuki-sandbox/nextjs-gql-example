@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { RepoList } from "./types";
 
+export * from "./fragment";
+
 type PresenterProps = {
   repoList: RepoList;
 };

@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { REPOSITORIES_FRAGMENT } from "../Repositories/fragment";
+import { REPOSITORIES_FRAGMENT } from "../Repositories";
 
 export const PROFILE_FRAGMENT = gql`
   ${REPOSITORIES_FRAGMENT}
