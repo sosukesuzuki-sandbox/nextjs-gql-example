@@ -1,4 +1,4 @@
-import { RepoList } from "../Repositories/types";
+import { RepoList } from "./Repositories/types";
 
 export type Profile = {
   bio: string;

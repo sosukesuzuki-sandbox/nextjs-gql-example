@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Profile } from "./types";
-import { Repositories } from "../Repositories";
-import { RepoList } from "../Repositories/types";
+import { Repositories } from "./Repositories";
+import { RepoList } from "./Repositories/types";
 
 export * from "./fragment";
 
