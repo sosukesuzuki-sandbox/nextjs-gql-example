@@ -1,8 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Profile } from "./types";
-import { RepositoriesSection } from "./RepositoriesSection";
-import { RepoList } from "./RepositoriesSection/types";
+import { RepoList, Profile } from "./types";
 
 export * from "./types";
 export * from "./fragment";
@@ -21,7 +19,12 @@ const Presenter: FC<PresenterProps> = ({ name, bio, avatorUrl, repoList }) => (
       {bio ? <p>{bio}</p> : null}
     </div>
     <div>
-      <RepositoriesSection repoList={repoList} />
+      {repoList.edges.map(({ node }) => (
+        <div style={{ border: "1px solid black" }} key={node.name}>
+          <p>{node.name}</p>
+          <p>{node.description}</p>
+        </div>
+      ))}
     </div>
   </div>
 );
