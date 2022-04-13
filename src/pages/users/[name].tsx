@@ -19,27 +19,23 @@ const Presenter: FC<Props> = ({ loading, data }) =>
     </div>
   );
 
-function usePageQuery(username: string) {
-  return useMemo(
-    () => gql`
-      ${PROFILE_FRAGMENT}
-      query {
-        user(login: "${username}") {
-	  ...Profile
-        }
-      }
-  `,
-    [username]
-  );
-}
+const query = gql`
+  ${PROFILE_FRAGMENT}
+  query User($login: String!) {
+    user(login: $login) {
+      ...Profile
+    }
+  }
+`;
 
 const Container: FC = () => {
   const router = useRouter();
   const username = useMemo(() => {
     return router.query.name as string;
   }, [router.query]);
-  const query = usePageQuery(username);
-  const { data, error, loading } = useQuery(query);
+  const { data, error, loading } = useQuery(query, {
+    variables: { login: username },
+  });
   return <Presenter data={data} error={error} loading={loading} />;
 };
 
