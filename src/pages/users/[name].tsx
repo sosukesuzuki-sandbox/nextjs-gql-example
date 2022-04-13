@@ -9,14 +9,14 @@ import {
 import { Loading } from "~/components/common/Loading";
 
 type Result = { user: Profile };
+type PageQueryResult = QueryResult<Result>;
 
-type Props = {
-  data: QueryResult<Result>["data"];
-  error: QueryResult<Result>["error"];
-  loading: QueryResult<Result>["loading"];
+type PresenterProps = {
+  data: PageQueryResult["data"];
+  error: PageQueryResult["error"];
+  loading: PageQueryResult["loading"];
 };
-
-const Presenter: FC<Props> = ({ loading, data }) =>
+const Presenter: FC<PresenterProps> = ({ loading, data }) =>
   loading || data == null ? (
     <Loading />
   ) : (
