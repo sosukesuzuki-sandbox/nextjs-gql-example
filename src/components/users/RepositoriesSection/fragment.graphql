@@ -1,0 +1,10 @@
+fragment Repositories on User {
+  repositories(first: 5) {
+    edges {
+      node {
+        name
+        description
+      }
+    }
+  }
+}

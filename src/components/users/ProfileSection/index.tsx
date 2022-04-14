@@ -1,44 +1,56 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import Image from "next/image";
-import { RepoList, Profile } from "./types";
-
-export * from "./types";
-export * from "./fragment";
+import { ProfileFragment, RepositoriesFragment } from "~/generated/graphql";
+import { RepositoriesSection } from "../RepositoriesSection";
 
 type PresenterProps = {
-  name: string;
-  bio: string;
+  login: string;
+  name?: string | null;
+  bio?: string | null;
   avatorUrl: string;
-  repoList: RepoList;
+  repositories: RepositoriesFragment["repositories"];
 };
-const Presenter: FC<PresenterProps> = ({ name, bio, avatorUrl, repoList }) => (
+const Presenter: FC<PresenterProps> = ({
+  login,
+  name,
+  bio,
+  avatorUrl,
+  repositories,
+}) => (
   <div>
     <div>
+      <h1>{login}</h1>
       <Image src={avatorUrl} width="50" height="50" />
-      <h1>{name}</h1>
+      {bio ? <p>{name}</p> : null}
       {bio ? <p>{bio}</p> : null}
     </div>
     <div>
-      {repoList.edges.map(({ node }) => (
-        <div style={{ border: "1px solid black" }} key={node.name}>
-          <p>{node.name}</p>
-          <p>{node.description}</p>
-        </div>
-      ))}
+      <RepositoriesSection repositories={repositories} />
     </div>
   </div>
 );
 
-type ContainerProps = {
-  profile: Profile;
-};
+type ContainerProps = { profile: ProfileFragment };
 const Container: FC<ContainerProps> = ({ profile }) => {
+  const login = useMemo(() => {
+    return profile.login;
+  }, [profile]);
+  const name = useMemo(() => {
+    return profile.name;
+  }, [profile]);
+  const bio = useMemo(() => {
+    return profile.name;
+  }, [profile]);
+  const avatorUrl = useMemo(() => {
+    return profile.avatarUrl ?? `https://github.com/identicons/${login}.png`;
+  }, [profile, login]);
   return (
     <Presenter
-      name={profile.name}
-      bio={profile.bio}
-      avatorUrl={profile.avatarUrl}
-      repoList={profile.repositories}
+      login={login}
+      name={name}
+      bio={bio}
+      avatorUrl={avatorUrl}
+      repositories={profile.repositories}
     />
   );
 };

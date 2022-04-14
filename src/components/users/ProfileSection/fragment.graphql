@@ -1,0 +1,7 @@
+fragment Profile on User {
+  login
+  bio
+  name
+  avatarUrl
+  ...Repositories
+}
