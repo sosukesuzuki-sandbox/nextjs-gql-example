@@ -1,11 +1,11 @@
 import { FC } from "react";
 
-const Presenter: FC = () => {
+const LoadingPresenter: FC = () => {
   return <p>loading...</p>;
 };
 
-const Container: FC = () => {
-  return <Presenter />;
+const LoadingContainer: FC = () => {
+  return <LoadingPresenter />;
 };
 
-export { Container as Loading };
+export { LoadingContainer as Loading };

@@ -7,7 +7,7 @@ type Egdes = Repositories["edges"];
 type PresenterProps = {
   edges: NonNullable<Egdes>;
 };
-const Presenter: FC<PresenterProps> = ({ edges }) => (
+const RepositoriesSectionPresenter: FC<PresenterProps> = ({ edges }) => (
   <div>
     {edges.map((edge) =>
       edge?.node ? (
@@ -23,11 +23,11 @@ const Presenter: FC<PresenterProps> = ({ edges }) => (
 type ContainerProps = {
   repositories: RepositoriesFragment;
 };
-const Container: FC<ContainerProps> = ({ repositories }) => {
+const RepositoriesSectionContainer: FC<ContainerProps> = ({ repositories }) => {
   const edges = useMemo(() => {
     return repositories.repositories.edges ?? [];
   }, [repositories]);
-  return <Presenter edges={edges} />;
+  return <RepositoriesSectionPresenter edges={edges} />;
 };
 
-export { Container as RepositoriesSection };
+export { RepositoriesSectionContainer as RepositoriesSection };

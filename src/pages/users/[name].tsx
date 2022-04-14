@@ -32,6 +32,6 @@ const Container: FC = () => {
   return <Presenter user={data?.user} error={error} loading={loading} />;
 };
 
-export default function () {
+export default function UserProfilePage() {
   return <Container />;
 }

@@ -8,7 +8,12 @@ type PresenterProps = {
   bio?: string | null;
   avatorUrl: string;
 };
-const Presenter: FC<PresenterProps> = ({ login, name, bio, avatorUrl }) => (
+const ProfileSectionPresenter: FC<PresenterProps> = ({
+  login,
+  name,
+  bio,
+  avatorUrl,
+}) => (
   <div>
     <div>
       <h1>{login}</h1>
@@ -20,7 +25,7 @@ const Presenter: FC<PresenterProps> = ({ login, name, bio, avatorUrl }) => (
 );
 
 type ContainerProps = { profile: ProfileFragment };
-const Container: FC<ContainerProps> = ({ profile }) => {
+const ProfileSectionContainer: FC<ContainerProps> = ({ profile }) => {
   const login = useMemo(() => {
     return profile.login;
   }, [profile]);
@@ -34,8 +39,13 @@ const Container: FC<ContainerProps> = ({ profile }) => {
     return profile.avatarUrl ?? `https://github.com/identicons/${login}.png`;
   }, [profile, login]);
   return (
-    <Presenter login={login} name={name} bio={bio} avatorUrl={avatorUrl} />
+    <ProfileSectionPresenter
+      login={login}
+      name={name}
+      bio={bio}
+      avatorUrl={avatorUrl}
+    />
   );
 };
 
-export { Container as ProfileSection };
+export { ProfileSectionContainer as ProfileSection };
