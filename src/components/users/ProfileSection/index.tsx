@@ -21,7 +21,7 @@ const Presenter: FC<PresenterProps> = ({
     <div>
       <h1>{login}</h1>
       <Image src={avatorUrl} width="50" height="50" />
-      {bio ? <p>{name}</p> : null}
+      {name ? <p>{name}</p> : null}
       {bio ? <p>{bio}</p> : null}
     </div>
     <div>
@@ -39,7 +39,7 @@ const Container: FC<ContainerProps> = ({ profile }) => {
     return profile.name;
   }, [profile]);
   const bio = useMemo(() => {
-    return profile.name;
+    return profile.bio;
   }, [profile]);
   const avatorUrl = useMemo(() => {
     return profile.avatarUrl ?? `https://github.com/identicons/${login}.png`;
