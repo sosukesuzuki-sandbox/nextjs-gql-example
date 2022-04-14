@@ -21,11 +21,11 @@ const Presenter: FC<PresenterProps> = ({ edges }) => (
 );
 
 type ContainerProps = {
-  repositories: RepositoriesFragment["repositories"];
+  repositories: RepositoriesFragment;
 };
 const Container: FC<ContainerProps> = ({ repositories }) => {
   const edges = useMemo(() => {
-    return repositories.edges ?? [];
+    return repositories.repositories.edges ?? [];
   }, [repositories]);
   return <Presenter edges={edges} />;
 };

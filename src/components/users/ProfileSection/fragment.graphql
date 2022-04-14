@@ -3,5 +3,4 @@ fragment Profile on User {
   bio
   name
   avatarUrl
-  ...Repositories
 }

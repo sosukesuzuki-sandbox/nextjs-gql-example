@@ -24252,7 +24252,7 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
-export type ProfileFragment = { __typename?: 'User', login: string, bio?: string | null, name?: string | null, avatarUrl: any, repositories: { __typename?: 'RepositoryConnection', edges?: Array<{ __typename?: 'RepositoryEdge', node?: { __typename?: 'Repository', name: string, description?: string | null } | null } | null> | null } };
+export type ProfileFragment = { __typename?: 'User', login: string, bio?: string | null, name?: string | null, avatarUrl: any };
 
 export type RepositoriesFragment = { __typename?: 'User', repositories: { __typename?: 'RepositoryConnection', edges?: Array<{ __typename?: 'RepositoryEdge', node?: { __typename?: 'Repository', name: string, description?: string | null } | null } | null> | null } };
 
@@ -24263,6 +24263,14 @@ export type UserQueryVariables = Exact<{
 
 export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', login: string, bio?: string | null, name?: string | null, avatarUrl: any, repositories: { __typename?: 'RepositoryConnection', edges?: Array<{ __typename?: 'RepositoryEdge', node?: { __typename?: 'Repository', name: string, description?: string | null } | null } | null> | null } } | null };
 
+export const ProfileFragmentDoc = gql`
+    fragment Profile on User {
+  login
+  bio
+  name
+  avatarUrl
+}
+    `;
 export const RepositoriesFragmentDoc = gql`
     fragment Repositories on User {
   repositories(first: 5) {
@@ -24275,22 +24283,15 @@ export const RepositoriesFragmentDoc = gql`
   }
 }
     `;
-export const ProfileFragmentDoc = gql`
-    fragment Profile on User {
-  login
-  bio
-  name
-  avatarUrl
-  ...Repositories
-}
-    ${RepositoriesFragmentDoc}`;
 export const UserDocument = gql`
     query User($login: String!) {
   user(login: $login) {
     ...Profile
+    ...Repositories
   }
 }
-    ${ProfileFragmentDoc}`;
+    ${ProfileFragmentDoc}
+${RepositoriesFragmentDoc}`;
 
 /**
  * __useUserQuery__
